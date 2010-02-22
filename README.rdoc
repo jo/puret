@@ -9,6 +9,7 @@ Puret is quiet like model_translations http://github.com/janne/model_translation
 
 You need configure the puret gem inside your gemfile:
 
+  source 'http://gemcutter.org'
   gem 'puret'
 
 You can also use the latest edge version by specifying the git repository:
@@ -80,6 +81,11 @@ In case you already have a translated model and want to add some more puret attr
 This will create the appropriate migration and configure your Post model to translate the new attribute body.
 
 Keep it simple! Relax.
+
+
+== Diggin deeper
+
+Read the Rdoc documentation at http://rdoc.info/projects/jo/puret.
 
 
 == Bugs and Feedback
