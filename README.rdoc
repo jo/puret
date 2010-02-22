@@ -1,0 +1,86 @@
+== Puret
+
+Puret is a minimal pure translation library for translating database values.
+Puret is like model_translations (http://github.com/janne/model_translations), but comes with generators to help you get started.
+
+Rails 3 is required.
+
+
+== Installation
+
+You need configure the puret gem inside your gemfile:
+
+  gem "puret"
+
+You can also use the latest edge version by specifying the git repository:
+
+  gem "puret", :git => "git://github.com/jo/puret.git"
+
+Do not forget to run
+
+  bundle install
+
+
+== Basic Usage
+
+This is a walkthrough with all steps you need to setup puret translated attributes, including model and migration. You MUST also check out the *Generators* section below to help you start.
+
+We're assuming here you want a Post model with some puret attributes, as outlined below:
+
+  class Post < ActiveRecord::Base
+    puret :title, :description
+  end
+
+
+The pure translations are stored in a different translation model for every model you need translations for:
+
+  class PostTranslation < ActiveRecord::Base
+    puret_for :post
+  end
+
+
+You now need to create a migration for the translations table:
+
+  create_table(:post_translations) do |t|
+    t.references :post
+    t.string :locale, :limit => 2
+
+    t.string :title
+    t.text :description
+
+    t.timestamps
+  end
+  add_index :post_translations, [:post_id, :locale], :unique => true
+
+Thats it!
+
+Now you are able to translate values for the attributes :title and :description per locale:
+
+    I18n.locale = :en
+    post.title = "Puret really rocks!"
+    post.title #=> Puret really rocks!
+    I18n.locale = :de
+    post.title = "Puret rockt wirklich!"
+    post.title #=> Puret rockt wirklich!
+    I18n.locale = :en
+    post.title #=> Puret really rocks!
+
+
+== Generators
+
+Puret comes with some generators to help you with your daily job:
+
+  rails generate puret:model Post title:string description:text
+
+will setup all the code above and more, either you already have a Post model or not. In the latter case the Post model will be created for you.
+
+In case you already have a translated model and want to add some more puret attributes, just run the puret:attribute generator:
+
+  rails generate puret:attribute Post body:text
+
+This will create the appropriate migration and configure your Post model to translate the new attribute body.
+
+Keep it simple! Relax.
+
+
+Copyright (c) 2010 Johannes Jörg Schmidt, TF, released under the MIT license
