@@ -83,4 +83,12 @@ This will create the appropriate migration and configure your Post model to tran
 Keep it simple! Relax.
 
 
+== Bugs and Feedback
+
+If you discover any bugs or want to drop a line, feel free to create an issue on
+GitHub:
+
+http://github.com/jo/puret/issues
+
+
 Copyright (c) 2010 Johannes Jörg Schmidt, TF, released under the MIT license
