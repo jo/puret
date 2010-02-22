@@ -1,10 +1,20 @@
 module Puret
   module ActiveRecordExtensions
     module ClassMethods
+      # Configure translation model dependency.
+      # Eg:
+      #   class PostTranslation < ActiveRecord::Base
+      #     puret_for :post
+      #   end
       def puret_for(model)
         belongs_to model
       end
 
+      # Configure translated attributes.
+      # Eg:
+      #   class Post < ActiveRecord::Base
+      #     puret :title, description
+      #   end
       def puret(*attributes)
         make_it_puret! unless included_modules.include?(InstanceMethods)
 
