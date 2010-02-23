@@ -57,4 +57,24 @@ class PuretTest < ActiveSupport::TestCase
     post.title.blank?
     assert_equal 'Deutscher Text', post.text
   end
+
+  test 'translation model should validate presence of model' do
+    t = PostTranslation.new
+    t.valid?
+    assert_not_nil t.errors[:post]
+  end
+
+  test 'translation model should validate presence of locale' do
+    t = PostTranslation.new
+    t.valid?
+    assert_not_nil t.errors[:locale]
+  end
+
+  test 'translation model should validate uniqueness of locale in model scope' do
+    post = Post.first
+    t1 = PostTranslation.new :post => post, :locale => "de"
+    t1.save!
+    t2 = PostTranslation.new :post => post, :locale => "de"
+    assert_not_nil t2.errors[:locale]
+  end
 end

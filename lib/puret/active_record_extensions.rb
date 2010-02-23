@@ -8,6 +8,8 @@ module Puret
       #   end
       def puret_for(model)
         belongs_to model
+        validates_presence_of model, :locale
+        validates_uniqueness_of :locale, :scope => "#{model}_id"
       end
 
       # Configure translated attributes.
