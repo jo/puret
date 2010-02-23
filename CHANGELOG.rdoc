@@ -1,3 +1,10 @@
+== 1.0.1
+
+* validations for translation model:
+  * validates presence of model
+  * validates uniqueness of locale, scope model
+
+
 == 1.0
 
 * First release
