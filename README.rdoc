@@ -58,12 +58,13 @@ Now you are able to translate values for the attributes :title and :description 
 
   I18n.locale = :en
   post.title = 'Puret really rocks!'
-  post.title #=> Puret really rocks!
   I18n.locale = :de
   post.title = 'Puret rockt wirklich!'
-  post.title #=> Puret rockt wirklich!
+
   I18n.locale = :en
   post.title #=> Puret really rocks!
+  I18n.locale = :de
+  post.title #=> Puret rockt wirklich!
 
 
 == Generators
