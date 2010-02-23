@@ -1,3 +1,8 @@
+== 1.0.2
+
+* allow switch locale without saving. Makes it possible to assign all translations before saving the object.
+
+
 == 1.0.1
 
 * validations for translation model:

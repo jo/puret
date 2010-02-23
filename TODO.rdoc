@@ -3,5 +3,4 @@
 * support find_by_attribute
 * helpers for fields_for attribute
 * model lookup for default_locale
-* allow switch locale without saving (?)
 * documentation for generator rollbacks
