@@ -54,8 +54,19 @@ class PuretTest < ActiveSupport::TestCase
     I18n.locale = :de
     post = Post.first
     post.text = 'Deutscher Text'
-    post.title.blank?
+    assert !post.title.blank?
     assert_equal 'Deutscher Text', post.text
+  end
+
+  test 'temporary locale switch should work like expected' do
+    post = Post.new
+    post.title = 'English title'
+    I18n.locale = :de
+    post.title = 'Deutscher Titel'
+    post.save
+    assert_equal 'Deutscher Titel', post.title
+    I18n.locale = :en
+    assert_equal 'English title', post.title
   end
 
   test 'translation model should validate presence of model' do

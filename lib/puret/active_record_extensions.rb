@@ -21,14 +21,21 @@ module Puret
         make_it_puret! unless included_modules.include?(InstanceMethods)
 
         attributes.each do |attribute|
+          # attribute setter
           define_method "#{attribute}=" do |value|
-            puret_attributes[attribute] = value
+            puret_attributes[I18n.locale][attribute] = value
           end
 
+          # attribute getter
           define_method attribute do
-            return puret_attributes[attribute] if puret_attributes[attribute]
+            # return previously setted attributes if present
+            return puret_attributes[I18n.locale][attribute] if puret_attributes[I18n.locale][attribute]
             return if new_record?
 
+            # Lookup chain:
+            # if translation not present in current locale,
+            # use default locale, if present.
+            # Otherwise use first translation
             translation = translations.detect { |t| t.locale.to_sym == I18n.locale } ||
               translations.detect { |t| t.locale.to_sym == I18n.default_locale } ||
               translations.first
@@ -40,6 +47,7 @@ module Puret
 
       private
 
+      # configure model
       def make_it_puret!
         include InstanceMethods
 
@@ -49,15 +57,19 @@ module Puret
     end
 
     module InstanceMethods
+      # attributes are stored in @puret_attributes instance variable via setter
       def puret_attributes
-        @puret_attributes ||= {}
+        @puret_attributes ||= Hash.new { |hash, key| hash[key] = {} }
       end
 
+      # called after save
       def update_translations!
         return if puret_attributes.blank?
-        translation = translations.find_or_initialize_by_locale(I18n.locale.to_s)
-        translation.attributes = translation.attributes.merge(puret_attributes)
-        translation.save!
+        puret_attributes.each do |locale, attributes|
+          translation = translations.find_or_initialize_by_locale(locale.to_s)
+          translation.attributes = translation.attributes.merge(attributes)
+          translation.save!
+        end
       end
     end
   end
