@@ -5,3 +5,6 @@
 * model lookup for default_locale
 * allow switch locale without saving (?)
 * documentation for generator rollbacks
+* validations for translation model:
+ * validates presence of model
+ * validates uniqueness of locale, scope model
