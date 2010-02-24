@@ -15,7 +15,7 @@ module Puret
       # Configure translated attributes.
       # Eg:
       #   class Post < ActiveRecord::Base
-      #     puret :title, description
+      #     puret :title, :description
       #   end
       def puret(*attributes)
         make_it_puret! unless included_modules.include?(InstanceMethods)
