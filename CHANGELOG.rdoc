@@ -1,3 +1,8 @@
+== 1.0.3
+
+* fallback improvements
+  * instance and class lookup for default_locale
+
 == 1.0.2
 
 * allow switch locale without saving. Makes it possible to assign all translations before saving the object.

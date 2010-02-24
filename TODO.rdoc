@@ -3,6 +3,5 @@
 * support find_by_attribute
 * helpers for fields_for attribute
 * fallback improvements
-  * model lookup for default_locale
   * fallback chain
 * documentation for generator rollbacks
