@@ -73,9 +73,9 @@ Now you are able to translate values for the attributes :title and :description 
 
 If a translation is not available in your locale, puret looks 
 
-# for an instance method called *default_locale* and the corresponding translation
-# for a class method called *default_locale* and the corresponding translation
-# for a translation in I18n.default_locale
+1. for an instance method called *default_locale* and the corresponding translation
+2. for a class method called *default_locale* and the corresponding translation
+3. for a translation in I18n.default_locale
 
 In case a translation is not available in the default locale, puret uses the first locale it could find. That order is specified by creation time, so the first created translation will be returned.
 
