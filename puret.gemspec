@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{puret}
-  s.version = "1.0.2"
+  s.version = "1.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Johannes J\303\266rg Schmidt"]
-  s.date = %q{2010-02-23}
+  s.date = %q{2010-02-24}
   s.description = %q{Pure model translations}
   s.email = %q{schmidt@netzmerk.com}
   s.extra_rdoc_files = [

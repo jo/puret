@@ -71,7 +71,13 @@ Now you are able to translate values for the attributes :title and :description 
 
 == Translation lookup fallback
 
-If a translation is not available in your locale, puret looks for a translation in I18n.default_locale. In case a translation is not available in the default locale, too, puret uses the first locale it could find. That order is not specified by now. I am working on a more sophisticated approach, be sure to keep track of the puret development and please feel free to drop me a line if you have worked out something useful.
+If a translation is not available in your locale, puret looks 
+
+# for an instance method called *default_locale* and the corresponding translation
+# for a class method called *default_locale* and the corresponding translation
+# for a translation in I18n.default_locale
+
+In case a translation is not available in the default locale, puret uses the first locale it could find. That order is specified by creation time, so the first created translation will be returned.
 
 
 == Generators
