@@ -37,7 +37,7 @@ module Puret
             # use default locale, if present.
             # Otherwise use first translation
             translation = translations.detect { |t| t.locale.to_sym == I18n.locale } ||
-              translations.detect { |t| t.locale.to_sym == I18n.default_locale } ||
+              translations.detect { |t| t.locale.to_sym == puret_default_locale } ||
               translations.first
 
             translation ? translation[attribute] : nil
@@ -51,12 +51,18 @@ module Puret
       def make_it_puret!
         include InstanceMethods
 
-        has_many :translations, :class_name => "#{self.to_s}Translation", :dependent => :destroy
+        has_many :translations, :class_name => "#{self.to_s}Translation", :dependent => :destroy, :order => "created_at DESC"
         after_save :update_translations!
       end
     end
 
     module InstanceMethods
+      def puret_default_locale
+        return default_locale.to_sym if respond_to?(:default_locale)
+        return self.class.default_locale.to_sym if self.class.respond_to?(:default_locale)
+        I18n.default_locale
+      end
+
       # attributes are stored in @puret_attributes instance variable via setter
       def puret_attributes
         @puret_attributes ||= Hash.new { |hash, key| hash[key] = {} }

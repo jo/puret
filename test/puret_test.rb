@@ -12,7 +12,7 @@ class PuretTest < ActiveSupport::TestCase
   end
 
   test "database setup" do
-    assert Post.count == 1
+    assert_equal 1, Post.count
   end
  
   test "allow translation" do
@@ -23,10 +23,40 @@ class PuretTest < ActiveSupport::TestCase
     assert_equal 'English title', Post.first.title
   end
  
-  test "assert fallback to default" do
-    assert Post.first.title == 'English title'
+  test "assert fallback to default locale" do
+    post = Post.first
+    I18n.locale = :sv
+    post.title = 'Svensk titel'
+    I18n.locale = :en
+    assert_equal 'English title', post.title
     I18n.locale = :de
-    assert Post.first.title == 'English title'
+    assert_equal 'English title', post.title
+  end
+ 
+  test "assert fallback to saved default locale defined on instance" do
+    post = Post.first
+    def post.default_locale() :sv; end
+    assert_equal :sv, post.puret_default_locale
+    I18n.locale = :sv
+    post.title = 'Svensk titel'
+    post.save!
+    I18n.locale = :en
+    assert_equal 'English title', post.title
+    I18n.locale = :de
+    assert_equal 'Svensk titel', post.title
+  end
+ 
+  test "assert fallback to saved default locale defined on class level" do
+    post = Post.first
+    def Post.default_locale() :sv; end
+    assert_equal :sv, post.puret_default_locale
+    I18n.locale = :sv
+    post.title = 'Svensk titel'
+    post.save!
+    I18n.locale = :en
+    assert_equal 'English title', post.title
+    I18n.locale = :de
+    assert_equal 'Svensk titel', post.title
   end
  
   test "post has_many translations" do

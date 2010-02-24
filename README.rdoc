@@ -4,7 +4,7 @@ Puret is a minimal pure translation library for translating database values for 
 
 Puret is quiet like model_translations http://github.com/janne/model_translations (and borrowed much of its code), but comes with generators to help you get started.
 
-Puret does not create the translation model dynamically (like model_translations does) but creates the file via generator. I want to leave out as much magic as possible in order to allow customizing every part of your application.
+Puret does not create the translation model dynamically (like model_translations does) but creates the file via generator. Puret wants to leave out as much magic as possible and want to allow customizing every part of your application.
 
 
 == Installation
