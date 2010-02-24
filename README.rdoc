@@ -45,7 +45,7 @@ You now need to create a migration for the translations table:
 
   create_table(:post_translations) do |t|
     t.references :post
-    t.string :locale, :limit => 2
+    t.string :locale
 
     t.string :title
     t.text :description
