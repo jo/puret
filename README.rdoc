@@ -2,7 +2,9 @@
 
 Puret is a minimal pure translation library for translating database values for Rails 3.
 
-Puret is quiet like model_translations http://github.com/janne/model_translations (and borrowed much of its code), but comes with generators to help you get started and does not create the translation model dynamically but create it with generator.
+Puret is quiet like model_translations http://github.com/janne/model_translations (and borrowed much of its code), but comes with generators to help you get started.
+
+Puret does not create the translation model dynamically (like model_translations does) but creates the file via generator. I want to leave out as much magic as possible in order to allow customizing every part of your application.
 
 
 == Installation
@@ -65,6 +67,11 @@ Now you are able to translate values for the attributes :title and :description 
   post.title #=> Puret really rocks!
   I18n.locale = :de
   post.title #=> Puret rockt wirklich!
+
+
+== Translation lookup fallback
+
+If a translation is not available in your locale, puret looks for a translation in I18n.default_locale. In case a translation is not available in the default locale, too, puret uses the first locale it could find. That order is not specified by now. I am working on a more sophisticated approach, be sure to keep track of the puret development and please feel free to drop me a line if you have worked out something useful.
 
 
 == Generators
