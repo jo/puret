@@ -2,7 +2,7 @@ class Create<%= translations_table_name.camelize %> < ActiveRecord::Migration
   def self.up 
     create_table(:<%= translations_table_name %>) do |t|
       t.references :<%= reference_name %>
-      t.string :locale, :limit => 2
+      t.string :locale
 
 <% attributes.each do |attribute| -%>
       t.<%= attribute.type %> :<%= attribute.name %>
