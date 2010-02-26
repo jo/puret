@@ -2,6 +2,15 @@
 
 * support find_by_attribute
 * helpers for fields_for attribute
-* fallback improvements
-  * fallback chain
+* configurable fallback chain via :fallback => :default or :fallback => true
+* include options for default_scope via config :include => true
+
+
+== Testing
+
+* suppress schema update logging in tests
+
+
+== Documentation
+
 * documentation for generator rollbacks
