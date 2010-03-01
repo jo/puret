@@ -7,6 +7,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.references :post
     t.string :locale
     t.string :title
+    t.text :text
     t.timestamps
   end
 end
