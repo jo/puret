@@ -3,22 +3,14 @@ require 'test/unit'
 require 'active_support'
 require "active_record"
 require 'puret'
+require 'logger'
 
+ActiveRecord::Base.logger = Logger.new(nil)
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 
 def setup_db
-  ActiveRecord::Schema.define(:version => 1) do
-    create_table :posts do |t|
-      t.timestamps
-    end
-
-    create_table :post_translations do |t|
-      t.references :post
-      t.string :locale
-      t.string :title
-      t.timestamps
-    end
-  end
+  ActiveRecord::Migration.verbose = false
+  load "schema.rb"
 end
  
 def teardown_db

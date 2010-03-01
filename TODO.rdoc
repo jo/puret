@@ -6,11 +6,6 @@
 * include options for default_scope via config :include => true
 
 
-== Testing
-
-* suppress schema update logging in tests
-
-
 == Documentation
 
 * documentation for generator rollbacks
