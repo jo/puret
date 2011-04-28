@@ -118,4 +118,8 @@ class PuretTest < ActiveSupport::TestCase
     t2 = PostTranslation.new :post => post, :locale => "de"
     assert_not_nil t2.errors[:locale]
   end
+
+  test 'model should provide attribute_before_type_cast' do
+    assert_equal Post.first.title, Post.first.title_before_type_cast
+  end
 end
