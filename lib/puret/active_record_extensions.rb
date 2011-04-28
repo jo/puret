@@ -42,6 +42,10 @@ module Puret
 
             translation ? translation[attribute] : nil
           end
+
+          define_method "#{attribute}_before_type_cast" do
+            self.send(attribute)
+          end
         end
       end
 
