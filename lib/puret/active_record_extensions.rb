@@ -8,7 +8,7 @@ module Puret
       #   end
       def puret_for(model)
         belongs_to model
-        validates_presence_of model, :locale
+        validates_presence_of :locale
         validates_uniqueness_of :locale, :scope => "#{model}_id"
       end
 
@@ -56,6 +56,7 @@ module Puret
         include InstanceMethods
 
         has_many :translations, :class_name => "#{self.to_s}Translation", :dependent => :destroy, :order => "created_at DESC"
+        validates_associated :translations
         after_save :update_translations!
       end
     end
