@@ -1,3 +1,7 @@
+== Help Needed!
+
+Puret needs a new maintainer.
+
 == Puret
 
 Puret is a minimal pure translation library for translating database values for Rails 3.
